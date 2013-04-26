@@ -163,6 +163,7 @@ NSString* const SocketIOException = @"SocketIOException";
     else if (_isConnecting) {
         [_handshake cancel];
     }
+    [self onDisconnect:nil];
 }
 
 - (void) sendMessage:(NSString *)data

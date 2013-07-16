@@ -2,7 +2,7 @@
 //  SocketIO.h
 //  v0.3.3 ARC
 //
-//  based on 
+//  based on
 //  socketio-cocoa https://github.com/fpotter/socketio-cocoa
 //  by Fred Potter <fpotter@pieceable.com>
 //
@@ -15,7 +15,7 @@
 //
 //  Created by Philipp Kyeck http://beta-interactive.de
 //
-//  Updated by 
+//  Updated by
 //    samlown   https://github.com/samlown
 //    kayleg    https://github.com/kayleg
 //    taiyangc  https://github.com/taiyangc
@@ -102,6 +102,7 @@ typedef enum {
 @property (nonatomic, readonly) BOOL isConnected, isConnecting;
 @property (nonatomic, unsafe_unretained) id<SocketIODelegate> delegate;
 @property (nonatomic) BOOL returnAllDataFromAck;
+@property (nonatomic) BOOL defaultToXHR;
 
 - (id) initWithDelegate:(id<SocketIODelegate>)delegate;
 - (void) connectToHost:(NSString *)host onPort:(NSInteger)port;

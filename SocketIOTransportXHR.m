@@ -218,6 +218,10 @@ static NSString* kSecureXHRPortURL = @"https://%@:%d/socket.io/1/xhr-polling/%@"
         // Init array with [split count] / 2 because we only need the odd-numbered
         NSMutableArray *packets = [NSMutableArray arrayWithCapacity:[split count]/2];
 
+        // DIY hack: we are finding cases in production where packets are not allocated and adding causes a crash
+        if (!packets)
+            return @[payload];
+
         // Now all of the odd-numbered indices are the packets (1, 3, 5, etc.)
         [split enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             if(idx % 2 != 0) {

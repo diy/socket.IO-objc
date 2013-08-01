@@ -433,6 +433,11 @@ defaultToXHR = _defaultToXHR;
         NSArray *result = [test objectAtIndex:0];
         
         int idx = [[result objectAtIndex:1] intValue];
+        
+        // DIY hack: we've been getting garbage index values that aren't handled properly from the regex causing crashes
+        if (idx < 0 || idx > 8)
+            return;
+        
         SocketIOPacket *packet = [[SocketIOPacket alloc] initWithTypeIndex:idx];
         
         packet.pId = [result objectAtIndex:2];

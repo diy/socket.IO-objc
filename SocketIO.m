@@ -624,9 +624,14 @@ defaultToXHR = _defaultToXHR;
     _isConnecting = NO;
     
     if ([_delegate respondsToSelector:@selector(socketIO:onError:)]) {
+        NSDictionary *errorInfo = nil;
+        
+        if (error)
+            errorInfo = [NSDictionary dictionaryWithObject:error forKey:NSLocalizedDescriptionKey];
+    
         NSError *err = [NSError errorWithDomain:SocketIOError
                                            code:SocketIOHandshakeFailed
-                                       userInfo:@{NSLocalizedDescriptionKey: error}];
+                                       userInfo:errorInfo];
         
         [_delegate socketIO:self onError:err];
     }

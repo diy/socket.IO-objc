@@ -232,8 +232,13 @@ static NSString* kSecureXHRPortURL = @"https://%@:%d/socket.io/1/xhr-polling/%@"
         NSLog(@"Parsed a payload!");
         return packets;
     } else {
-        // Regular single-packet payload
-        return @[payload];
+    
+        // regular single-packet payload
+        if (payload && [payload length] > 0)
+            return @[payload];
+        else
+            return nil;
+    
     }
 }
 
@@ -242,7 +247,7 @@ static NSString* kSecureXHRPortURL = @"https://%@:%d/socket.io/1/xhr-polling/%@"
     NSString *message = [[NSString alloc] initWithData:_data encoding:NSUTF8StringEncoding];
     DEBUGLOG(@"response: __%@__", message);
     
-    if (![message isEqualToString:@"1"]) {
+    if (message && ![message isEqualToString:@"1"]) {
         NSArray *messages = [self packetsFromPayload:message];
         [messages enumerateObjectsUsingBlock:^(NSString *message, NSUInteger idx, BOOL *stop) {
             [delegate onData:message];

@@ -15,5 +15,4 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.dependency 'DIYSocketRocket', '~> 0.2.2'
 end
